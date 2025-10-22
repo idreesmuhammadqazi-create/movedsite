@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Site Moved</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: system-ui, -apple-system, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            padding: 20px;
+            color: #333333;
+        }
+
+        .container {
+            max-width: 600px;
+            background: #ffffff;
+            padding: 60px 40px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            opacity: 0;
+            animation: fadeIn 0.5s ease-out forwards;
+        }
+
+        h1 {
+            font-size: 32px;
+            color: #333333;
+            margin-bottom: 24px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+        }
+
+        p {
+            font-size: 18px;
+            color: #666666;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        a {
+            color: #0066cc;
+            text-decoration: underline;
+            transition: color 0.2s ease;
+            cursor: pointer;
+        }
+
+        a:hover {
+            color: #0052a3;
+        }
+
+        .apology {
+            font-size: 16px;
+            color: #999999;
+            margin-top: 24px;
+            font-style: italic;
+        }
+
+        .countdown {
+            margin-top: 32px;
+            padding: 16px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 14px;
+            color: #666666;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 40px 24px;
+            }
+
+            h1 {
+                font-size: 28px;
+            }
+
+            p {
+                font-size: 16px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>This Site Has Moved</h1>
+        <p>This site has moved to <a href="https://pseudorun.vercel.app/">https://pseudorun.vercel.app/</a></p>
+        <p class="apology">Sorry for your inconvenience</p>
+        <div class="countdown">Redirecting in 5 seconds...</div>
+    </div>
+
+    <script>
+        let countdown = 5;
+        let redirectTimer;
+        let redirectTimeout;
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const link = document.querySelector('a');
+            const countdownDisplay = document.querySelector('.countdown');
+
+            // Set up automatic redirect after 5 seconds
+            redirectTimeout = setTimeout(function() {
+                window.location.href = 'https://pseudorun.vercel.app/';
+            }, 5000);
+
+            // Set up countdown timer
+            redirectTimer = setInterval(function() {
+                countdown--;
+
+                if (countdown > 0) {
+                    const secondText = countdown === 1 ? 'second' : 'seconds';
+                    countdownDisplay.textContent = 'Redirecting in ' + countdown + ' ' + secondText + '...';
+                } else if (countdown === 0) {
+                    countdownDisplay.textContent = 'Redirecting now...';
+                } else {
+                    clearInterval(redirectTimer);
+                }
+            }, 1000);
+
+            // Set up link click handler to navigate immediately
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                clearTimeout(redirectTimeout);
+                clearInterval(redirectTimer);
+                window.location.href = 'https://pseudorun.vercel.app/';
+            });
+        });
+    </script>
+</body>
+</html>
