@@ -1,1 +1,54 @@
-# movedsite
+Site Has Moved: Simple Redirect Landing Page
+
+This repository provides a minimal, single-file landing page designed to inform users and search engines that your website has permanently moved to a new domain or URL structure. It is ideal for quick site migrations where you need to maintain continuity and SEO value.
+
+Key Features
+
+Single File Deployment: The entire solution is contained within a single index.html file for easy deployment.
+
+Automatic Redirection: Uses a standard HTML <meta http-equiv="refresh"> tag to redirect users after a short, configurable delay.
+
+Clear User Notification: Provides a visible message, including a direct link, in case the automatic redirect fails or is blocked.
+
+SEO Best Practice Placeholder: This page should be served with a HTTP 301 (Permanent Redirect) status code by your server configuration (e.g., Apache, Nginx) for maximum SEO benefit. The client-side refresh tag serves as a fallback for the user experience.
+
+Configuration
+
+To use this page, you only need to update one key variable inside the index.html file:
+
+Set the New URL: Locate the following line in the <head> section and replace [YOUR_NEW_URL] with the full URL of your new website:
+
+<meta http-equiv="refresh" content="5;url=[YOUR_NEW_URL]">
+
+
+Example: content="5;url=https://www.mynewsite.com"
+
+Configure Redirect Delay (Optional): The number 5 in the content attribute sets the delay in seconds before redirection. You can change this:
+
+content="0;..." for an immediate redirect (less user-friendly).
+
+content="10;..." for a longer delay.
+
+Update the Visible Link: For accessibility, ensure the visible link in the body matches the new URL:
+
+<p class="text-xl mt-4">
+  If you are not redirected automatically, please follow this link:
+  <a href="[YOUR_NEW_URL]" class="text-blue-500 hover:underline">
+    [YOUR_NEW_URL]
+  </a>
+</p>
+
+
+Deployment Recommendations (Critical for SEO)
+
+While the HTML handles the user experience, the server must communicate the permanence of the move to search engines.
+
+Before deploying this file, ensure your server is configured to serve this page with an HTTP Status Code of 301 Moved Permanently.
+
+If you are using a standard web host, you would typically:
+
+Upload the modified index.html file to the root of the old domain.
+
+Configure your hosting control panel or .htaccess file to explicitly send a 301 status for all requests to the old domain, pointing them to this page.
+
+Failing to use a 301 status code may result in a loss of search ranking value.
