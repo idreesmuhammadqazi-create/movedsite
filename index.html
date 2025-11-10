@@ -4,6 +4,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Site Moved</title>
+    <!-- 
+        Added the meta refresh tag for SEO and as a reliable fallback.
+        The content is set to 5 seconds, matching the JavaScript countdown. 
+    -->
+    <meta http-equiv="refresh" content="5;url=https://pseudorun.vercel.app/">
     <style>
         * {
             margin: 0;
@@ -12,7 +17,7 @@
         }
 
         body {
-            font-family: system-ui, -apple-system, sans-serif;
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
             background-color: #f5f5f5;
             display: flex;
             align-items: center;
@@ -26,8 +31,8 @@
             max-width: 600px;
             background: #ffffff;
             padding: 60px 40px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 12px; /* Slightly more rounded */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
             text-align: center;
             opacity: 0;
             animation: fadeIn 0.5s ease-out forwards;
@@ -37,7 +42,7 @@
             font-size: 32px;
             color: #333333;
             margin-bottom: 24px;
-            font-weight: 400;
+            font-weight: 600; /* Bolder for clarity */
             letter-spacing: -0.5px;
         }
 
@@ -52,7 +57,7 @@
             color: #0066cc;
             text-decoration: underline;
             transition: color 0.2s ease;
-            cursor: pointer;
+            font-weight: 500;
         }
 
         a:hover {
@@ -69,10 +74,11 @@
         .countdown {
             margin-top: 32px;
             padding: 16px;
-            background: #f8f9fa;
-            border-radius: 4px;
-            font-size: 14px;
-            color: #666666;
+            background: #e9f0ff; /* Light blue background for emphasis */
+            border-radius: 8px;
+            font-size: 16px;
+            color: #0056b3;
+            font-weight: 700;
         }
 
         @keyframes fadeIn {
@@ -104,12 +110,17 @@
 <body>
     <div class="container">
         <h1>This Site Has Moved</h1>
-        <p>This site has moved to <a href="https://pseudorun.vercel.app/">https://pseudorun.vercel.app/</a></p>
-        <p class="apology">Sorry for your inconvenience</p>
+        <p>You can now find us at the new address:</p>
+        <p>
+            <a href="https://pseudorun.vercel.app/">https://pseudorun.vercel.app/</a>
+        </p>
         <div class="countdown">Redirecting in 5 seconds...</div>
+        <p class="apology">We apologize for any inconvenience!</p>
     </div>
 
     <script>
+        // Target URL is set here and in the meta tag above
+        const NEW_URL = 'https://pseudorun.vercel.app/';
         let countdown = 5;
         let redirectTimer;
         let redirectTimeout;
@@ -118,9 +129,10 @@
             const link = document.querySelector('a');
             const countdownDisplay = document.querySelector('.countdown');
 
-            // Set up automatic redirect after 5 seconds
+            // The <meta http-equiv="refresh"> handles the redirect, but the JS countdown is nice for user experience.
+            // We still keep the JS redirect as a safety measure.
             redirectTimeout = setTimeout(function() {
-                window.location.href = 'https://pseudorun.vercel.app/';
+                window.location.href = NEW_URL;
             }, 5000);
 
             // Set up countdown timer
@@ -131,18 +143,20 @@
                     const secondText = countdown === 1 ? 'second' : 'seconds';
                     countdownDisplay.textContent = 'Redirecting in ' + countdown + ' ' + secondText + '...';
                 } else if (countdown === 0) {
-                    countdownDisplay.textContent = 'Redirecting now...';
+                    // Stop the visual countdown slightly before the actual redirect in case of minor JS timing differences
+                    countdownDisplay.textContent = 'Redirecting now...'; 
                 } else {
                     clearInterval(redirectTimer);
                 }
             }, 1000);
 
-            // Set up link click handler to navigate immediately
+            // If the user clicks the link, stop the timers and navigate immediately
             link.addEventListener('click', function(e) {
-                e.preventDefault();
+                // Prevent the default link behavior since we are handling navigation manually
+                e.preventDefault(); 
                 clearTimeout(redirectTimeout);
                 clearInterval(redirectTimer);
-                window.location.href = 'https://pseudorun.vercel.app/';
+                window.location.href = NEW_URL;
             });
         });
     </script>
