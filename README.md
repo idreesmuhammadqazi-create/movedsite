@@ -1,10 +1,34 @@
-Site Has Moved: Simple Redirect Landing PageThis repository provides a minimal, single-file landing page designed to inform users and search engines that your website has permanently moved to a new domain or URL structure. It is ideal for quick site migrations where you need to maintain continuity and SEO value.Key FeaturesSingle File Deployment: The entire solution is contained within a single index.html file for easy deployment.Automatic Redirection: Uses a standard HTML <meta http-equiv="refresh"> tag to redirect users after a short, configurable delay.Clear User Notification: Provides a visible message, including a direct link, in case the automatic redirect fails or is blocked.SEO Best Practice Placeholder: This page should be served with a HTTP 301 (Permanent Redirect) status code by your server configuration (e.g., Apache, Nginx) for maximum SEO benefit. The client-side refresh tag serves as a fallback for the user experience.ConfigurationTo use this page, you only need to update one key variable inside the index.html file:Set the New URL: Locate the following line in the <head> section and replace [YOUR_NEW_URL] with the full URL of your new website:<meta http-equiv="refresh" content="5;url=[YOUR_NEW_URL]">
+# 📦 Site Has Moved: Simple Redirect Landing Page
 
-Example: content="5;url=https://www.mynewsite.com"Configure Redirect Delay (Optional): The number 5 in the content attribute sets the delay in seconds before redirection. You can change this:content="0;..." for an immediate redirect (less user-friendly).content="10;..." for a longer delay.Update the Visible Link: For accessibility, ensure the visible link in the body matches the new URL:<p class="text-xl mt-4">
-  If you are not redirected automatically, please follow this link:
-  <a href="[YOUR_NEW_URL]" class="text-blue-500 hover:underline">
-    [YOUR_NEW_URL]
-  </a>
-</p>
+This repository contains a **minimal, single-file landing page** (`index.html`) designed to inform users and search engines that your website has permanently moved to a new domain or URL structure.
 
-Deployment Recommendations (Critical for SEO)While the HTML handles the user experience, the server must communicate the permanence of the move to search engines.Before deploying this file, ensure your server is configured to serve this page with an HTTP Status Code of 301 Moved Permanently.If you are using a standard web host, you would typically:Upload the modified index.html file to the root of the old domain.Configure your hosting control panel or .htaccess file to explicitly send a 301 status for all requests to the old domain, pointing them to this page.Failing to use a 301 status code may result in a loss of search ranking value.
+It is an ideal solution for quick site migrations where maintaining user experience and **SEO value** is critical.
+
+---
+
+## ✨ Key Features
+
+* **Single File Deployment:** The entire solution is contained within a single `index.html` file (using inline CSS and JavaScript) for ultra-easy deployment.
+* **Automatic Redirection:** Uses both a client-side **JavaScript countdown** and a robust **HTML `<meta refresh>` tag** to ensure users are redirected after a short, configurable delay (5 seconds by default).
+* **Clear User Notification:** Provides a visible message and a **direct, clickable link** in case the automatic redirect is blocked or JavaScript is disabled.
+* **SEO Fallback:** The design emphasizes the need for a server-side **HTTP 301 (Permanent Redirect)** status code, with the meta tag serving as the client-side signal.
+
+---
+
+## ⚙️ Configuration (How to Use)
+
+To deploy this page, you only need to update the **target URL** inside the `index.html` file.
+
+The target URL is hardcoded in **two** places for redundancy:
+
+### 1. Update the HTML Meta Tag (SEO/Fallback)
+
+Locate the `<meta>` tag in the `<head>` section and replace the example URL:
+
+```html
+<meta http-equiv="refresh" content="5;url=[https://pseudorun.vercel.app/](https://pseudorun.vercel.app/)">
+// Target URL is set here and in the meta tag above
+const NEW_URL = '[https://pseudorun.vercel.app/](https://pseudorun.vercel.app/)'; 
+// ...
+// In the <body>:
+<a href="[https://pseudorun.vercel.app/](https://pseudorun.vercel.app/)">[https://pseudorun.vercel.app/](https://pseudorun.vercel.app/)</a>
